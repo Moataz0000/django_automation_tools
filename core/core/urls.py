@@ -12,7 +12,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
 
-    path('', include('dataentry.urls', namespace='dataentry')),
+    path('dataentry/', include('dataentry.urls', namespace='dataentry')),
     path('celery/', views.celery)
     
 ]

@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand, CommandError
 from dataentry.models import Student
 import datetime
 from django.apps import apps
-
+from ...utils import generate_csv_file
 
 
 # Propsed command --> python3 manage.py exportdata model_name
@@ -20,7 +20,7 @@ class Command(BaseCommand):
     
     def handle(self, *args ,**kwargs):
         # fetch the data from database
-        model_name = kwargs['model_name'].capitalize()
+        model_name = kwargs['model_name']
         
         # search on the model in our app
         model = None
@@ -33,18 +33,14 @@ class Command(BaseCommand):
         
         if not model:
             raise CommandError(f'Model {model_name} is not found!')
-            return
+            
         
         
         data = model.objects.all() 
 
 
-        # generate the timestamp of current data and time
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")   
-        
-        # define the csv file name/path
-        file_path = f'exported_{model_name}_data_{timestamp}.csv'
-        
+        # generate csv file path
+        file_path = generate_csv_file(model_name)
 
         # open the csv file and write the data
         with open(file_path, 'w', newline='') as file:
