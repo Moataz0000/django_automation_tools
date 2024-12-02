@@ -13,6 +13,7 @@ urlpatterns = [
     path('', views.home, name='home'),
 
     path('', include('dataentry.urls', namespace='dataentry')),
+    path('celery/', views.celery)
     
 ]
 if settings.DEBUG:

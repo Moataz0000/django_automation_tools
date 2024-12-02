@@ -1,5 +1,11 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+
+
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,10 +15,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@#o$0@5#@mrj16ejw(p0j_#27pc*drbkvs9h0ko*^ath+tw+kj'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -107,7 +113,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+STATIC_ROOT = 'static'
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'core/static')
+]
 
 
 # Media Files
@@ -126,3 +136,18 @@ from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: "danger",
 }
+
+
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+
+
+
+
+# Email Configuration
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+DEFUALT_FROM_EMAIL = os.environ.get('DEFUALT_FROM_EMAIL')
+DEFAULT_TO_EMAIL = 'motazfawzy73@gmail.com'
