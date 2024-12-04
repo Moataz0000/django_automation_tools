@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-blue-100 to-indigo-100 px-4">
+    <h1 class="text-4xl font-extrabold text-blue-600 mb-8 animate-fade-in text-center">
+        Remove Image Background
+    </h1>
+    
+    <!-- Form Section -->
+    <form 
+        action="{% url 'remove_background:image_remove_background' %}" 
+        method="POST" 
+        enctype="multipart/form-data"
+        class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md transform hover:scale-105 transition-transform duration-300"
+    >
+        {% csrf_token %}
+        <div class="mb-6">
+            <label class="block text-gray-700 font-semibold mb-2" for="image">
+                Upload Image:
+            </label>
+            <input 
+                type="file" 
+                name="image" 
+                id="image" 
+                class="block w-full text-gray-900 border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                required
+            >
+        </div>
+        <button 
+            type="submit"
+            class="w-full bg-blue-500 text-white font-bold py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300"
+        >
+            Remove Background
+        </button>
+    </form>
+    
+    {% if processed_image_url %}
+        <!-- Result Section -->
+        <div class="mt-10 bg-white p-6 rounded-xl shadow-2xl w-full max-w-md transform hover:scale-105 transition-transform duration-300">
+            <h2 class="text-2xl font-bold text-blue-600 mb-4 animate-slide-in text-center">
+                Result
+            </h2>
+            <img 
+                src="{{ processed_image_url }}" 
+                alt="Processed Image" 
+                class="w-full rounded-lg shadow-md mb-4"
+            >
+            <a 
+                href="{{ download_url }}" 
+                download 
+                class="inline-block w-full bg-green-500 text-white font-bold py-3 rounded-lg text-center hover:bg-green-600 transition-colors duration-300"
+            >
+                Download Image
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock content %}

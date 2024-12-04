@@ -13,7 +13,10 @@ urlpatterns = [
     path('', views.home, name='home'),
 
     path('dataentry/', include('dataentry.urls', namespace='dataentry')),
-    path('celery/', views.celery)
+    path('accounts/', include('accounts.urls', namespace='accounts')),
+    path('emails/', include('emails.urls', namespace='emails')),
+    path('remove-background/', include('removebackground.urls', namespace='remove_background')),
+    
     
 ]
 if settings.DEBUG:

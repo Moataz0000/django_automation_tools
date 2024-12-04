@@ -7,8 +7,3 @@ def home(request):
     return render(request, 'home.html')
 
 
-
-
-def celery(request):
-    send_email_task.delay()
-    return HttpResponse("<h1>Fun esecuted Success</h1>")

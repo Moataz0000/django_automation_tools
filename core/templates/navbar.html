@@ -1,0 +1,39 @@
+<header class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-6 shadow-lg">
+    <div class="w-full px-4 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+        <!-- Logo -->
+        <a href="/" class="text-3xl sm:text-4xl font-bold text-center md:text-left">
+            Automate with Django
+        </a>
+
+        
+        {% if request.user.is_authenticated %}
+        <!-- Buttons for authenticated users -->
+        <div class="space-x-0 space-y-2 md:space-x-4 md:space-y-0 flex flex-col md:flex-row">
+           
+            <a href="/accounts/sign-out" class="bg-indigo-700 text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-indigo-600 transition text-center">
+                Sign Out
+            </a>
+
+            <button  class="bg-white text-blue-500 px-4 py-2 rounded-lg font-semibold shadow hover:bg-gray-100 transition text-center">
+                Welcome, {{ request.user.username }}
+            </button>
+        </div>
+    {% else %}
+        <!-- Buttons for unauthenticated users -->
+        <div class="space-x-0 space-y-2 md:space-x-4 md:space-y-0 flex flex-col md:flex-row">
+            <a href="/accounts/sign-in" class="bg-white text-blue-500 px-4 py-2 rounded-lg font-semibold shadow hover:bg-gray-100 transition text-center">
+                Login
+            </a> 
+            <a href="/accounts/sign-up" class="bg-indigo-700 text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-indigo-600 transition text-center">
+                Register
+            </a>
+        </div>
+    {% endif %}
+    
+            
+ 
+
+
+
+    </div>
+</header>

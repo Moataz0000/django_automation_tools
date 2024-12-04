@@ -62,7 +62,7 @@ def send_email_notification(mail_subject, message, to_email, attachment=None):
     try:
         # Correct the typo in the setting name
         from_email = settings.DEFAULT_FROM_EMAIL  
-        mail = EmailMessage(mail_subject, message, from_email, to=[to_email])
+        mail = EmailMessage(mail_subject, message, from_email, to=to_email)
 
         # Attach the file if it exists
         if attachment is not None:

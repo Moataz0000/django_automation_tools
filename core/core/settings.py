@@ -33,9 +33,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    # apps
     'dataentry',
     'uploads',
+    'accounts',
+    'emails',
+    'removebackground',
+    
+    # 3party
+    "crispy_forms",
+    "crispy_tailwind",
+    'widget_tweaks',
+
 ]
+
+CRISPY_TEMPLATE_PACK = "tailwind"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
